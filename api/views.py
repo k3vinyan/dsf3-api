@@ -17,7 +17,7 @@ def drivers(request):
     if request.method == 'GET':
         data = serializers.serialize("json", Driver.objects.all())
 
-        return Response(data, content_type='application/json')
+        return HttpResponse(data, content_type='application/json')
 
     if request.method == 'POST':
         req = json.loads(request.body)
@@ -65,6 +65,7 @@ def tbas(request):
     if request.method == 'POST':
         req = json.loads(request.body)
 
+        print req
         for item in req:
 
             tba = item['tba']
@@ -84,24 +85,28 @@ def tbas(request):
                     cluster = filter(lambda x: x.isalpha(), route)
                     route = Route(
                                     route=route,
-                                    cluster = route,
+                                    cluster = cluster,
                                     tbaCount = 0
                                 )
                     route.save()
                 try:
                     Tba.objects.get(tba=tba)
                 except ObjectDoesNotExist:
+                    routeToUpdate = Route.objects.get(route=route)
                     tba = Tba(
                         tba=tba,
                         link=link,
                         status=status,
                         city=city,
-                        route=Route.objects.get(route=route),
+                        route=routeToUpdate,
                         zipCode=zipCode,
                         sortZone=sortZone,
                         address=address
                     )
                     tba.save()
+
+                    routeToUpdate.update(tbas=ListF('tbas').append(tba))
+
             else:
                 tba = Tba(
                     tba=tba,
