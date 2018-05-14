@@ -42,7 +42,7 @@ class Driver(models.Model):
     checkout    = models.BooleanField(default=False)
     packageScan = models.CharField(max_length=3, blank=True)
     routingTool = models.CharField(max_length=3, blank=True)
-    route       = models.ForeignKey(Route, on_delete=models.CASCADE, null=True)
+    route       = models.CharField(max_length=10, blank=True, null=True)
     block       = models.ForeignKey(Block, null=True)
     create_at   = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -53,11 +53,11 @@ class Driver(models.Model):
         ordering = ('block', 'firstName',)
 
 class Tba(models.Model):
-    driver      = models.ForeignKey(Driver, blank=True, null=True)
-    route       = models.ForeignKey(Route, on_delete=models.CASCADE, null=True)
-    tba         = models.CharField(max_length=50)
-    status      = models.CharField(max_length=50)
-    link        = models.CharField(max_length=50)
+    driver      = models.CharField(max_length=20, blank=True, null=True)
+    route       = models.CharField(max_length=10, blank=True, null=True)
+    tba         = models.CharField(max_length=20)
+    status      = models.CharField(max_length=10)
+    link        = models.CharField(max_length=25)
     address     = models.CharField(max_length=20, blank=True)
     city        = models.CharField(max_length=15, blank=True)
     zipCode     = models.CharField(max_length=20, blank=True)

@@ -14,13 +14,13 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+DATA_UPLOAD_MAX_MEMORY_SIZE = 7340032
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+SECRET_KEY = ')z&k=cd1)rv(kbebgsp9w#s5wfzhpm8)34oufjxx=738r))raj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

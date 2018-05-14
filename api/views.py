@@ -83,12 +83,14 @@ def tbas(request):
                     Route.objects.get(route=route)
                 except ObjectDoesNotExist:
                     cluster = filter(lambda x: x.isalpha(), route)
-                    route = Route(
+                    print cluster
+                    print route
+                    aRoute = Route(
                                     route=route,
                                     cluster = cluster,
                                     tbaCount = 0
                                 )
-                    route.save()
+                    aRoute.save()
                 try:
                     Tba.objects.get(tba=tba)
                 except ObjectDoesNotExist:
@@ -104,8 +106,6 @@ def tbas(request):
                         address=address
                     )
                     tba.save()
-
-                    routeToUpdate.update(tbas=ListF('tbas').append(tba))
 
             else:
                 tba = Tba(
